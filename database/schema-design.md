@@ -121,3 +121,18 @@ BOOKINGS
   |
   | N:1
 ROOMS
+
+## Database Implementation Status
+
+### PostgreSQL Tables Created
+- users
+- hotels
+- rooms
+- inventory
+- bookings
+
+### Database Name
+travel_ecosystem
+
+### Connection Status
+Backend successfully connected using pg package.
