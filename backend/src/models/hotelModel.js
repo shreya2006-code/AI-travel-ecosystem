@@ -16,6 +16,7 @@ const createHotel = async (hotelData) => {
     latitude,
     longitude,
     property_type,
+    document_path,
   } = hotelData;
 
   const query = `
@@ -33,11 +34,12 @@ const createHotel = async (hotelData) => {
       ifsc_code,
       latitude,
       longitude,
-      property_type
+      property_type,
+      document_path
     )
     VALUES (
       $1,$2,$3,$4,$5,$6,$7,
-      $8,$9,$10,$11,$12,$13,$14
+      $8,$9,$10,$11,$12,$13,$14,$15
     )
     RETURNING *;
   `;
@@ -57,6 +59,7 @@ const createHotel = async (hotelData) => {
     latitude,
     longitude,
     property_type,
+    document_path,
   ];
 
   const result = await pool.query(query, values);

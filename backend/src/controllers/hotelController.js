@@ -26,6 +26,9 @@ const registerHotel = async (req, res) => {
         console.log("No file uploaded");
     }
 
+    if (req.file) {
+        req.body.document_path = req.file.path;
+    }
     const hotel = await hotelModel.createHotel(req.body);
 
     res.status(201).json({
