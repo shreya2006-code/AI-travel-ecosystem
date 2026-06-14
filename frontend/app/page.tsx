@@ -16,6 +16,7 @@ export default function Home() {
     pan_number: "",
     ifsc_code: "",
   });
+  const [document, setDocument] = useState<File | null>(null);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -26,13 +27,25 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const uploadData = new FormData();
+
+    uploadData.append("owner_id", "1");
+    uploadData.append("hotel_name", formData.hotel_name);
+    uploadData.append("address", formData.address);
+    uploadData.append("city", formData.city);
+    uploadData.append("country", formData.country);
+    uploadData.append("gst_number", formData.gst_number);
+    uploadData.append("pan_number", formData.pan_number);
+    uploadData.append("ifsc_code", formData.ifsc_code);
+
+    if (document) {
+      uploadData.append("document", document);
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/hotels/register",
-        {
-          owner_id: 1,
-          ...formData,
-        }
+        uploadData
       );
 
       console.log(response.data);
@@ -133,6 +146,11 @@ export default function Home() {
 
           <input
             type="file"
+            onChange={(e) => {
+              if (e.target.files?.[0]) {
+                setDocument(e.target.files[0]);
+              }
+            }}
             className="w-full border p-3 rounded text-black placeholder-gray-500"
           />
 
