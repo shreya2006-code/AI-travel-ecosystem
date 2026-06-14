@@ -61,10 +61,15 @@ export default function Home() {
         ifsc_code: "",
       });
 
-    } catch (error) {
+    } 
+    catch (error: any) {
       console.error(error);
 
-      alert("Registration Failed");
+      const message =
+        error?.response?.data?.errors?.join("\n") ||
+        "Registration Failed";
+
+      alert(message);
     }
   };
 
