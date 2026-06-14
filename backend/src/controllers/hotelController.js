@@ -17,6 +17,15 @@ const registerHotel = async (req, res) => {
             errors,
         });
     }
+
+    console.log("Uploaded File:");
+
+    if (req.file) {
+        console.log(req.file.filename);
+    } else {
+        console.log("No file uploaded");
+    }
+
     const hotel = await hotelModel.createHotel(req.body);
 
     res.status(201).json({
